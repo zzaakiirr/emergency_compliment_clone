@@ -22,15 +22,9 @@
 
 {% block javascript %}
 <script>
-    /*
-    On focus out on input nickname,
-    call AJAX get request to check if the nickName
-    already exists or not.
-    */
     $("#next_compliment_btn").click(function (e) {
         e.preventDefault();
         let compliment_paragraph = $('#compliment_paragraph')
-        // console.log($('#compliment_text').text())
         $.ajax({
             type: 'GET',
             url: "{% url 'get_new_compliment' %}",
