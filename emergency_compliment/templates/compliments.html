@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Emergency compliment
+{% endblock %}
+
+{% block content %}
+<div class="columns is-centered" style="margin: auto;">
+  <div class="column is-half mt-4">
+      <p class="is-size-2 has-text-centered has-text-weight-semibold" id="compliment_paragraph">
+        {{ compliment.text }}
+      </p>
+    <div class="column mt-4">
+      <div class="buttons is-centered are-medium">
+        <a href="https://www.greatbigstuff.com" class="button is-dark mr-5">Thanks!</a>
+        <button class="button is-light" id="next_compliment_btn">Meh.</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    /*
+    On focus out on input nickname,
+    call AJAX get request to check if the nickName
+    already exists or not.
+    */
+    $("#next_compliment_btn").click(function (e) {
+        e.preventDefault();
+        let compliment_paragraph = $('#compliment_paragraph')
+        // console.log($('#compliment_text').text())
+        $.ajax({
+            type: 'GET',
+            url: "{% url 'get_new_compliment' %}",
+            data: {"old_compliment_text": compliment_paragraph.text()},
+            success: function (response) {
+                if (response['result']) {
+                    new_compliment = response['new_compliment']
+                    compliment_paragraph.text(new_compliment)
+                }
+            },
+            error: function (response) {
+                console.log(response)
+            }
+        })
+    })
+</script>
+{% endblock javascript %}
