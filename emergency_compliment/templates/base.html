@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,14 +11,14 @@
   {% endblock style %}
 </head>
 <body>
-  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-yellow" role="navigation" aria-label="main navigation">
     <div class="container">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://bulma.io">emergency compliment</a>
-        <a role="button" class="navbar-burger" data-target="navbarBasicExample" aria-label="menu" aria-expanded="false">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+        <a class="navbar-item is-size-5" href="{% url 'index' %}">emergency compliment</a>
+        <a role="button" class="navbar-burger" data-target="navbarBasicExample" aria-label="menu" aria-expanded="false" >
+          <span class="burger-element" aria-hidden="true"></span>
+          <span class="burger-element" aria-hidden="true"></span>
+          <span class="burger-element" aria-hidden="true"></span>
         </a>
       </div>
       <div class="navbar-menu">
@@ -31,23 +33,17 @@
   {% endblock content %}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{% static 'js/navbar-burger.js' %}"></script>
   <script>
-    // Credit: https://stackoverflow.com/a/54851881
-    document.addEventListener('DOMContentLoaded', () => {
-      const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    // Credit: https://stackoverflow.com/a/3627747
+    Array.prototype.random = function () {
+      return this[Math.floor(Math.random() * this.length)];
+    }
 
-      if ($navbarBurgers.length > 0) {
-        $navbarBurgers.forEach( el => {
-          el.addEventListener('click', () => {
-            const target = el.dataset.target;
-            const $target = document.getElementById(target);
+    const BG_COLORS = ['#F2ED53', '#E5B156', '#B4CF4E']
+    const COLORING_ELEMENTS_SELECTOR = '*:not(.burger-element)'
 
-            el.classList.toggle('is-active');
-            $target.classList.toggle('is-active');
-          });
-        });
-      }
-    });
+    $(COLORING_ELEMENTS_SELECTOR).css('background-color', BG_COLORS.random())
   </script>
   {% block javascript %}
   {% endblock javascript %}
