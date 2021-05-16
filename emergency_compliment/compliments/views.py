@@ -8,7 +8,7 @@ from .models import Compliment
 
 def index(request):
     context = {'compliment': __get_new_compliment()}
-    return render(request, 'compliments.html', context)
+    return render(request, 'index.html', context)
 
 
 def get_new_compliment(request):
