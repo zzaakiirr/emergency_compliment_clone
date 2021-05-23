@@ -1,3 +1,10 @@
 from django.db import models
+from django.utils import timezone
 
-# Create your models here.
+from ckeditor_uploader.fields import RichTextUploadingField
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=240)
+    text = RichTextUploadingField()
+    published_at = models.DateTimeField(default=timezone.now)
