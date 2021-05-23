@@ -31,16 +31,7 @@
           if (response['result']) {
             new_compliment = response['new_compliment']
             compliment_paragraph.text(new_compliment)
-
-            old_bg_color = $('*').css('background-color')
-            do {
-              new_bg_color = BG_COLORS.random()
-            }
-            while (compareColors(old_bg_color, new_bg_color))
-
-            console.log(old_bg_color, new_bg_color)
-            console.log(old_bg_color == new_bg_color)
-            $(COLORING_ELEMENTS_SELECTOR).css('background-color', new_bg_color)
+            setBgColor(response['bg_color'])
           }
         },
         error: function (response) {
@@ -49,22 +40,5 @@
       })
     })
 
-    // Credit: https://stackoverflow.com/a/19406153
-    function compareColors(left, right) {
-      // Create a dummy element to assign colors to.
-      var dummy = $('<div/>');
-
-      // Set the color to the left color value, and read it back.
-      $(dummy).css('color', left);
-      var adjustedLeft = $(dummy).css('color');
-
-      // Set the color to the right color value, and read it back.
-      $(dummy).css('color', right);
-      var adjustedRight = $(dummy).css('color');
-
-      // Both colors are now adjusted to use the browser's internal format,
-      // so we can compare them directly.
-      return adjustedLeft == adjustedRight;
-    }
 </script>
 {% endblock javascript %}

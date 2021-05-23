@@ -35,15 +35,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{% static 'js/navbar-burger.js' %}"></script>
   <script>
-    // Credit: https://stackoverflow.com/a/3627747
-    Array.prototype.random = function () {
-      return this[Math.floor(Math.random() * this.length)];
+    function setBgColor(color) {
+      const COLORING_ELEMENTS_SELECTOR = '*:not(.burger-element)'
+      let bgColor = color == null ? '{{ request.session.bg_color }}' : color
+      $(COLORING_ELEMENTS_SELECTOR).css('background-color', bgColor)
     }
 
-    const BG_COLORS = ['#F2ED53', '#E5B156', '#B4CF4E']
-    const COLORING_ELEMENTS_SELECTOR = '*:not(.burger-element)'
-
-    $(COLORING_ELEMENTS_SELECTOR).css('background-color', BG_COLORS.random())
+    setBgColor()
   </script>
   {% block javascript %}
   {% endblock javascript %}
