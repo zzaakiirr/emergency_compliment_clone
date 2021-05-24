@@ -134,4 +134,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Ckeditor config
 
+MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_URL = '/media/'
 CKEDITOR_UPLOAD_PATH = "uploads/"

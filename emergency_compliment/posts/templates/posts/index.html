@@ -5,5 +5,21 @@
 {% endblock %}
 
 {% block content %}
-  TODO: Implement
+<div class="columns is-centered" style="height: 90vh;">
+  <div class="column is-half" >
+    {% for post in posts %}
+      <div class="mb-4">
+        <a href="{% url 'posts:detail' post.id %}" class="is-size-3 has-text-dark has-text-weight-semibold" id="compliment_paragraph">
+          {{ post.title }}
+        </a>
+        <p class="has-text-weight-semibold">{{ post.published_at }}</p>
+        {% if post.text|length > 1000 %}
+          <p>{{ post.text|safe|slice:1000 }}...</p>
+        {% else %}
+          <p>{{ post.text|safe }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
