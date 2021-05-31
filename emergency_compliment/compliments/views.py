@@ -11,7 +11,7 @@ from .models import Compliment
 def index(request):
     context = {'compliment': __get_new_compliment()}
     __set_bg_color(request.session)
-    return render(request, 'index.html', context)
+    return render(request, 'compliments/index.html', context)
 
 
 def get_new_compliment(request):
