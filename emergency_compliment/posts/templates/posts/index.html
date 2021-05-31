@@ -13,11 +13,7 @@
           {{ post.title }}
         </a>
         <p class="has-text-weight-semibold">{{ post.published_at }}</p>
-        {% if post.text|length > 1000 %}
-          <p>{{ post.text|safe|slice:1000 }}...</p>
-        {% else %}
-          <p>{{ post.text|safe }}</p>
-        {% endif %}
+        <p>{{ post.text|safe }}</p>
       </div>
     {% endfor %}
   </div>
