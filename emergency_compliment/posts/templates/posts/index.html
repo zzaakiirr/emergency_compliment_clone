@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Post
+{% endblock %}
+
+{% block content %}
+<div class="columns is-centered" style="height: 90vh;">
+  <div class="column is-half" >
+    {% for post in posts %}
+      <div class="mb-4">
+        <a href="{% url 'posts:detail' post.id %}" class="is-size-3 has-text-dark has-text-weight-semibold" id="compliment_paragraph">
+          {{ post.title }}
+        </a>
+        <p class="has-text-weight-semibold">{{ post.published_at }}</p>
+        <p>{{ post.text|safe }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

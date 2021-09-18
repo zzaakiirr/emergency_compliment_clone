@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Emergency happiness
+{% endblock %}
+
+{% block content %}
+<div class="columns is-centered is-vcentered" style="height: 90vh;">
+  <div class="column is-half mt-4" >
+    <p class="is-size-2 has-text-centered has-text-weight-semibold" id="compliment_paragraph">
+      {{ compliment.text }}
+    </p>
+    <div class="buttons is-centered are-large mt-4">
+      <a href="{% url 'posts:index' %}" class="is-size-1 mr-6">&#128540;</a>
+      <a class="is-size-1" id="next_compliment_btn">&#9197;</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("#next_compliment_btn").click(function (e) {
+      e.preventDefault()
+      let compliment_paragraph = $('#compliment_paragraph')
+      $.ajax({
+        type: 'GET',
+        url: "{% url 'get_new_compliment' %}",
+        data: {"old_compliment_text": compliment_paragraph.text()},
+        success: function (response) {
+          if (response['result']) {
+            new_compliment = response['new_compliment']
+            compliment_paragraph.text(new_compliment)
+            setBgColor(response['bg_color'])
+          }
+        },
+        error: function (response) {
+          console.log(response)
+        }
+      })
+    })
+
+</script>
+{% endblock javascript %}
